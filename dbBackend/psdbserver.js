@@ -4,7 +4,7 @@ import { query } from './db.js'
 const app = express()
 app.use(express.json())
 
-// pass in username and password to login
+// pass in username and password to login, return id
 app.post('/login', async (req, res) => {
 
     const { username, password } = req.body
@@ -16,18 +16,19 @@ app.post('/login', async (req, res) => {
         )
 
         if (result.rows.length > 0) {
-            res.send('Login successful')
+            const userId = result.rows[0].id
+            res.json({ message: 'Login succesful', userId })
         } else {
             res.status(401).send('Credentials not found')
         }
     } catch (error) {
-        console.error(err)
+        console.error(error)
         res.status(500).send('Internal server error')
     }
 
 })
 
-// Search using a name, return a list of users that match(fuzzy) the given name
+// search using a name, return a list of users that match(fuzzy) the given name
 app.get('/users/search', async (req, res) => {
     const { name } = req.query;
 
