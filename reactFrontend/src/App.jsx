@@ -71,9 +71,9 @@ function App() {
 
               <AuthProvider>
                 <Routes>
-                  <Route path="/" element={<Search />} />
-                  <Route path="/profile/:id" element={<Profile />} />
-                  <Route path="/predictor" element={<Predictor />} />
+                  <Route path="/" element={<RequireAuth><Search /></RequireAuth>} />
+                  <Route path="/profile/:id" element={<RequireAuth><Profile /></RequireAuth>} />
+                  <Route path="/predictor" element={<RequireAuth><Predictor /></RequireAuth>} />
                   <Route path="/about" element={<About />} />
                   <Route path="/login" element={<LoginForm />} />
                 </Routes>
