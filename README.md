@@ -55,7 +55,7 @@ NOTE: if user's own id and target id do not fill any of the three conditions, th
 
 DB TABLES:
 
-Users:
+users:
 id int
 username string
 password string
@@ -64,7 +64,4 @@ phone_number string
 job_role string
 work_location string
 salary int
-
-Reports:
-manager_id string
-employee_id string
+manager_id int
