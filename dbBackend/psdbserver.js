@@ -4,6 +4,7 @@ import { query } from './db.js'
 const app = express()
 app.use(express.json())
 
+// pass in username and password to login
 app.post('/login', async (req, res) => {
 
     const { username, password } = req.body
@@ -26,13 +27,14 @@ app.post('/login', async (req, res) => {
 
 })
 
+// Search using a name, return a list of users that match(fuzzy) the given name
 app.get('/users/search', async (req, res) => {
     const { name } = req.query;
 
     console.log(name)
   
     if (!name) {
-      return res.status(400).send('Name query parameter is required');
+      return res.status(400).send('Name is required');
     }
   
     try {
@@ -48,6 +50,28 @@ app.get('/users/search', async (req, res) => {
       res.status(500).send('Internal Server Error');
     }
   });
+
+// get a specifc user based on their id
+app.get('/users/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await query(
+      'SELECT id, name, username, phone_number, job_role, work_location FROM users WHERE id = $1',
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).send('User not found');
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 app.listen(3000, () => {
     console.log('Server running on port 3000')
