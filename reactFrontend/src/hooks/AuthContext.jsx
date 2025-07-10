@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
         throw new Error("Login failed");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Network error: ", error);
     }
   };
 
