@@ -8,7 +8,8 @@
     
   },
    "scripts": {
-    "start": "node --watch psdbserver.js"
+    "start": "node --watch psdbserver.js",
+    "test": "jest"
    }
   
 

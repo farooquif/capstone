@@ -17,8 +17,8 @@ app.post('/api/login', async (req, res) => {
     )
 
     if (result.rows.length > 0) {
-      const userId = result.rows[0].id
-      res.json({ message: 'Login succesful', userId })
+      const id = result.rows[0].id
+      res.json({ message: 'Login succesful', id })
     } else {
       res.status(401).send('Credentials not found')
     }
@@ -42,7 +42,7 @@ app.get('/api/employees', async (req, res) => {
 
   try {
     const result = await query(
-      'SELECT id, name, username, phone_number, job_role, work_location FROM users WHERE name ILIKE $1',
+      'SELECT id, name, phone_number, job_role, work_location FROM users WHERE name ILIKE $1',
       [`%${name}%`]
     )
 
@@ -60,26 +60,26 @@ app.get('/api/profile', async (req, res) => {
   const { id, target_id } = req.query
 
   try {
+    // END AS needed when using CASE
     const result = await query(
       `
-     SELECT 
-        u.id, 
-        u.name, 
-        u.username, 
-        u.phone_number, 
-        u.job_role, 
-        u.work_location,
-        CASE 
-          WHEN u.id = $1
-               OR u.manager_id = $1
-               OR (
-                 SELECT job_role FROM users WHERE id = $1
-               ) IN ('HR Specialist', 'HR Director')
-          THEN u.salary
-          ELSE NULL
-        END AS salary
-      FROM users u
-      WHERE u.id = $2
+    SELECT 
+      users.id, 
+      users.name,  
+      users.phone_number, 
+      users.job_role, 
+      users.work_location,
+      CASE 
+      WHEN users.id = $1
+        OR users.manager_id = $1
+        OR (
+            SELECT job_role FROM users WHERE id = $1
+          ) IN ('HR Specialist', 'HR Director')
+      THEN users.salary
+      ELSE NULL
+    END AS salary
+  FROM users
+  WHERE users.id = $2
       `,
       [id, target_id]
     )
@@ -107,7 +107,7 @@ app.get('/api/reports', async (req, res) => {
   try {
     const result = await query(
       `
-      SELECT id, name, username, phone_number, job_role, work_location, salary
+      SELECT id, name, phone_number, job_role, work_location, salary
       FROM users
       WHERE manager_id = $1
       `,
