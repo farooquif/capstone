@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 
+// This code is derived from Sock Exchange code
+
 // Creating an authentication context
 const AuthContext = createContext(null);
 
@@ -19,14 +21,11 @@ export const AuthProvider = ({ children }) => {
           body: JSON.stringify({ username, password }),
         }
       );
-      const data = await response.json();
-      if (data.uid) {
-        setUser({
-          username,
-          uid: data.uid, // Storing the uid returned from the server
-        });
+      if (response.ok) {
+        const data = await response.json();
+        setId(data.id);
       } else {
-        throw new Error(data.message || "Login failed");
+        throw new Error("Login failed");
       }
     } catch (error) {
       console.error(error);
@@ -34,14 +33,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setUser(null); // In real scenarios, you might want to invalidate the session on the server as well
+    setId(null);
   };
-  
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ id, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
 // Hook to use authentication
 export const useAuth = () => useContext(AuthContext);
