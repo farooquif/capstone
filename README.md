@@ -6,11 +6,21 @@ Backend Routes:
 (1) POST /api/login:
 
 Body:
-    {
+
+{
     "username": string
     "password": string
-    }
-Returns: id (if success)
+}
+
+Returns:
+
+IF SUCCESS:
+{
+    "id": string
+}
+
+IF FAILURE:
+Return 401 error code.
 
 (2) GET /api/employees?name=<name>
 
@@ -28,6 +38,7 @@ Returns: List of employee objects, each containing name, id, job_role...
 (3) GET /api/profile?id=<user's own id>&target_id=<id of target employee>
 
 Returns:
+
 {
     "name": string,
     "phone_number": string,
