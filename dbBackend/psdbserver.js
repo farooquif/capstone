@@ -5,7 +5,7 @@ const app = express()
 app.use(express.json())
 
 // pass in username and password to login, return id
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
 
     const { username, password } = req.body
 
@@ -29,7 +29,7 @@ app.post('/login', async (req, res) => {
 })
 
 // search using a name, return a list of users that match(fuzzy) the given name
-app.get('/users/search', async (req, res) => {
+app.get('/api/employees', async (req, res) => {
     const { name } = req.query;
 
     console.log(name)
@@ -53,13 +53,32 @@ app.get('/users/search', async (req, res) => {
   });
 
 // get a specifc user based on their id
-app.get('/users/:id', async (req, res) => {
-  const { id } = req.params;
+app.get('/api/profile', async (req, res) => {
+  const { id, target_id } = req.query;
 
   try {
     const result = await query(
-      'SELECT id, name, username, phone_number, job_role, work_location FROM users WHERE id = $1',
-      [id]
+      `
+     SELECT 
+        u.id, 
+        u.name, 
+        u.username, 
+        u.phone_number, 
+        u.job_role, 
+        u.work_location,
+        CASE 
+          WHEN u.id = $1
+               OR u.manager_id = $1
+               OR (
+                 SELECT job_role FROM users WHERE id = $1
+               ) IN ('HR Specialist', 'HR Director')
+          THEN u.salary
+          ELSE NULL
+        END AS salary
+      FROM users u
+      WHERE u.id = $2
+      `,
+      [id, target_id]
     );
 
     if (result.rows.length === 0) {
