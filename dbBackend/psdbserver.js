@@ -4,6 +4,7 @@ import { query } from './db.js'
 const app = express()
 app.use(express.json())
 
+// #1
 // pass in username and password to login, return id
 app.post('/api/login', async (req, res) => {
 
@@ -28,6 +29,7 @@ app.post('/api/login', async (req, res) => {
 
 })
 
+// #2
 // search using a name, return a list of users that match(fuzzy) the given name
 app.get('/api/employees', async (req, res) => {
     const { name } = req.query;
@@ -52,6 +54,7 @@ app.get('/api/employees', async (req, res) => {
     }
   });
 
+// #3
 // get a specifc user based on their id
 app.get('/api/profile', async (req, res) => {
   const { id, target_id } = req.query;
@@ -86,6 +89,32 @@ app.get('/api/profile', async (req, res) => {
     }
 
     res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// #4
+// if user has people that report to them return a list of those people
+app.get('/api/reports', async (req, res) => {
+  const { id } = req.query;
+
+  if (!id) {
+    return res.status(400).send('"id" (manager ID) is required');
+  }
+
+  try {
+    const result = await query(
+      `
+      SELECT id, name, username, phone_number, job_role, work_location, salary
+      FROM users
+      WHERE manager_id = $1
+      `,
+      [id]
+    );
+
+    res.json(result.rows); // returns an array of reports (could be empty)
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');
