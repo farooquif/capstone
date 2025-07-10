@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS users;
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
@@ -6,18 +8,38 @@ CREATE TABLE users (
     phone_number VARCHAR(20),
     job_role VARCHAR(100),
     work_location VARCHAR(100),
-    salary DECIMAL(10, 2)
+    salary DECIMAL(10, 2),
+    manager_id INTEGER REFERENCES users(id),
+    CONSTRAINT check_manager_not_self CHECK (manager_id IS NULL OR manager_id <> id)
 );
 
-INSERT INTO users (name, username, password, phone_number, job_role, work_location, salary)
+-- Insert managers first (manager_id is NULL)
+INSERT INTO users (name, username, password, phone_number, job_role, work_location, salary, manager_id)
 VALUES 
-    ('John Smith', 'jsmith', 'apple123', '860-555-1234', 'DevOps Manager', 'Hartford', 95000),
-    ('Sarah Johnson', 'sjohnson', 'orange456', '860-555-2345', 'Human Relations Rep', 'New Haven', 85000),
-    ('Michael Brown', 'mbrown', 'banana789', '860-555-3456', 'Project Manager', 'Hartford', 110000),
-    ('Emily Davis', 'edavis', 'grape321', '860-555-4567', 'SE Manager', 'Stamford', 92000),
-    ('Robert Wilson', 'rwilson', 'cherry654', '860-555-5678', 'Software Engineer', 'Hartford', 98000),
-    ('Jennifer Lee', 'jlee', 'peach987', '860-555-6789', 'Business Analyst', 'New Haven', 88000),
-    ('David Martinez', 'dmartinez', 'kiwi246', '860-555-7890', 'DevOps Engineer', 'Stamford', 105000),
-    ('Lisa Thompson', 'lthompson', 'mango135', '860-555-8901', 'QA Engineer', 'Hartford', 90000),
-    ('James Anderson', 'janderson', 'lemon579', '860-555-9012', 'Product Manager', 'New Haven', 115000),
-    ('Patricia Garcia', 'pgarcia', 'berry864', '860-555-0123', 'Software Engineer', 'Hartford', 97000);
+    ('Alice Morgan', 'amorgan', 'passAlice', '860-555-0001', 'Engineering Director', 'New Haven', 135000, NULL),
+    ('Brian Chang', 'bchang', 'passBrian', '860-555-0002', 'Product Director', 'Hartford', 130000, NULL),
+    ('Clara Knight', 'cknight', 'passClara', '860-555-0003', 'HR Manager', 'Stamford', 90000, NULL);
+
+-- Insert employees who report to above managers
+INSERT INTO users (name, username, password, phone_number, job_role, work_location, salary, manager_id)
+VALUES 
+    ('Derek Liu', 'dliu', 'passDerek', '860-555-0004', 'Software Engineer', 'New Haven', 95000,
+        (SELECT id FROM users WHERE username = 'amorgan')),
+
+    ('Elena Torres', 'etorres', 'passElena', '860-555-0005', 'Frontend Developer', 'New Haven', 90000,
+        (SELECT id FROM users WHERE username = 'amorgan')),
+
+    ('Felix Grant', 'fgrant', 'passFelix', '860-555-0006', 'Product Analyst', 'Hartford', 88000,
+        (SELECT id FROM users WHERE username = 'bchang')),
+
+    ('Gina Patel', 'gpatel', 'passGina', '860-555-0007', 'QA Engineer', 'Stamford', 87000,
+        (SELECT id FROM users WHERE username = 'amorgan')),
+
+    ('Henry Osei', 'hosei', 'passHenry', '860-555-0008', 'HR Assistant', 'Stamford', 75000,
+        (SELECT id FROM users WHERE username = 'cknight')),
+
+    ('Isabella Chen', 'ichen', 'passIsabella', '860-555-0009', 'DevOps Engineer', 'Hartford', 99000,
+        (SELECT id FROM users WHERE username = 'amorgan')),
+
+    ('Jack Romero', 'jromero', 'passJack', '860-555-0010', 'UI/UX Designer', 'New Haven', 93000,
+        (SELECT id FROM users WHERE username = 'bchang'));
