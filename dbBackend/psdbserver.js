@@ -42,7 +42,7 @@ app.get('/api/employees', async (req, res) => {
 
   try {
     const result = await query(
-      'SELECT id, name, phone_number, job_role, work_location FROM users WHERE name ILIKE $1',
+      'SELECT id, name, job_role, image_url FROM users WHERE name ILIKE $1',
       [`%${name}%`]
     )
 
@@ -69,6 +69,7 @@ app.get('/api/profile', async (req, res) => {
       users.phone_number, 
       users.job_role, 
       users.work_location,
+      users.image_url,
       CASE 
       WHEN users.id = $1
         OR users.manager_id = $1
@@ -107,7 +108,7 @@ app.get('/api/reports', async (req, res) => {
   try {
     const result = await query(
       `
-      SELECT id, name, job_role, work_location
+      SELECT id, name, job_role, image_url
       FROM users
       WHERE manager_id = $1
       `,

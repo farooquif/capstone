@@ -10,13 +10,11 @@ CREATE TABLE users (
     work_location VARCHAR(100),
     salary DECIMAL(10, 2),
     manager_id INTEGER REFERENCES users(id),
-    portrait_url VARCHAR(255),
+    image_url VARCHAR(255),  
     CONSTRAINT check_manager_not_self CHECK (manager_id IS NULL OR manager_id <> id)
 );
 
--- Insert managers first (manager_id is NULL)
-
-INSERT INTO users (name, username, password, phone_number, job_role, work_location, salary, manager_id, portrait_url) VALUES
+INSERT INTO users (name, username, password, phone_number, job_role, work_location, salary, manager_id, image_url) VALUES
 ('John Smith', 'jsmith', 'apple123', '860-555-1234', 'Software Engineer', 'Hartford', 95000, 3, 'https://randomuser.me/api/portraits/men/35.jpg'),
 ('Sarah Johnson', 'sjohnson', 'beach123', '860-555-2345', 'Product Manager', 'Hartford', 120000, 3, 'https://randomuser.me/api/portraits/women/21.jpg'),
 ('Michael Chen', 'mchen', 'cloud123', '415-555-3456', 'CEO', 'San Francisco', 250000, NULL, 'https://randomuser.me/api/portraits/men/12.jpg'),
