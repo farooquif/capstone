@@ -8,6 +8,7 @@ const AuthContext = createContext(null);
 // Auth provider component that wraps your app components
 export const AuthProvider = ({ children }) => {
   const [id, setId] = useState(null);
+  const [name, setName] = useState(null);
 
   const login = async (username, password) => {
     try {
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }) => {
       if (response.ok) {
         const data = await response.json();
         setId(data.id);
+        setName(data.name)
       } else {
         throw new Error("Login failed");
       }
@@ -37,7 +39,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ id, login, logout }}>
+    <AuthContext.Provider value={{ id, name, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

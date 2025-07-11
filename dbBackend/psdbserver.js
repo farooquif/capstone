@@ -1,7 +1,10 @@
 import express from 'express'
 import { query } from './db.js'
+import cors from 'cors'
 
 const app = express()
+
+app.use(cors());
 app.use(express.json())
 
 // #1
@@ -18,7 +21,8 @@ app.post('/api/login', async (req, res) => {
 
     if (result.rows.length > 0) {
       const id = result.rows[0].id
-      res.json({ message: 'Login succesful', id })
+      const name = result.rows[0].name
+      res.json({ message: 'Login succesful', id, name })
     } else {
       res.status(401).send('Credentials not found')
     }
