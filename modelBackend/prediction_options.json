@@ -1,0 +1,30 @@
+{
+  "job_roles": [
+    "Customer Support",
+    "Data Analyst",
+    "Data Scientist",
+    "Finance Analyst",
+    "HR Manager",
+    "HR Specialist",
+    "Marketing Specialist",
+    "Product Manager",
+    "Project Manager",
+    "Sales Representative",
+    "Senior Software Engineer",
+    "Software Engineer",
+    "Tech Lead",
+    "UI Designer",
+    "UX Designer"
+  ],
+  "locations": [
+    "Atlanta",
+    "Boston",
+    "Chicago",
+    "Dallas",
+    "Hartford",
+    "Minneapolis",
+    "New York",
+    "San Francisco",
+    "Seattle"
+  ]
+}
