@@ -4,89 +4,6 @@ import { useAuth } from "../hooks/AuthContext";
 
 import EmployeeCard from "./EmployeeCard";
 
-const fake_reports = [
-  {
-    name: "John",
-    id: 1,
-    job_role: "CEO",
-  },
-  {
-    name: "Mark",
-    id: 2,
-    job_role: "HR",
-  },
-  {
-    name: "Ashley",
-    id: 3,
-    job_role: "Director",
-  },
-  {
-    name: "Claire",
-    id: 5,
-    job_role: "HR",
-  },
-  {
-    name: "John",
-    id: 1,
-    job_role: "CEO",
-  },
-  {
-    name: "Mark",
-    id: 2,
-    job_role: "HR",
-  },
-  {
-    name: "Ashley",
-    id: 3,
-    job_role: "Director",
-  },
-  {
-    name: "Claire",
-    id: 5,
-    job_role: "HR",
-  },
-  {
-    name: "John",
-    id: 1,
-    job_role: "CEO",
-  },
-  {
-    name: "Mark",
-    id: 2,
-    job_role: "HR",
-  },
-  {
-    name: "Ashley",
-    id: 3,
-    job_role: "Director",
-  },
-  {
-    name: "Claire",
-    id: 5,
-    job_role: "HR",
-  },
-  {
-    name: "John",
-    id: 1,
-    job_role: "CEO",
-  },
-  {
-    name: "Mark",
-    id: 2,
-    job_role: "HR",
-  },
-  {
-    name: "Ashley",
-    id: 3,
-    job_role: "Director",
-  },
-  {
-    name: "Claire",
-    id: 5,
-    job_role: "HR",
-  },
-];
-
 const Reports = () => {
   // Grab user's id from the auth context
   const auth = useAuth();
@@ -125,12 +42,13 @@ const Reports = () => {
             justifyContent: "center",
           }}
         >
-          {fake_reports.map((report) => (
+          {reports.map((report) => (
             <EmployeeCard
               key={report.id}
               name={report.name}
               id={report.id}
               job_role={report.job_role}
+              image_url={report.image_url}
             />
           ))}
         </div>

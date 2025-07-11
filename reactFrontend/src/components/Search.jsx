@@ -3,89 +3,6 @@ import { useState } from "react";
 
 import EmployeeCard from "./EmployeeCard";
 
-const fake_employees = [
-  {
-    "name": "John",
-    "id": 1,
-    "job_role": "CEO"
-  },
-  {
-    "name": "Mark",
-    "id": 2,
-    "job_role": "HR"
-  },
-  {
-    "name": "Ashley",
-    "id": 3,
-    "job_role": "Director"
-  },
-  {
-    "name": "Claire",
-    "id": 5,
-    "job_role": "HR"
-  },
-  {
-    "name": "John",
-    "id": 1,
-    "job_role": "CEO"
-  },
-  {
-    "name": "Mark",
-    "id": 2,
-    "job_role": "HR"
-  },
-  {
-    "name": "Ashley",
-    "id": 3,
-    "job_role": "Director"
-  },
-  {
-    "name": "Claire",
-    "id": 5,
-    "job_role": "HR"
-  },
-  {
-    "name": "John",
-    "id": 1,
-    "job_role": "CEO"
-  },
-  {
-    "name": "Mark",
-    "id": 2,
-    "job_role": "HR"
-  },
-  {
-    "name": "Ashley",
-    "id": 3,
-    "job_role": "Director"
-  },
-  {
-    "name": "Claire",
-    "id": 5,
-    "job_role": "HR"
-  },
-  {
-    "name": "John",
-    "id": 1,
-    "job_role": "CEO"
-  },
-  {
-    "name": "Mark",
-    "id": 2,
-    "job_role": "HR"
-  },
-  {
-    "name": "Ashley",
-    "id": 3,
-    "job_role": "Director"
-  },
-  {
-    "name": "Claire",
-    "id": 5,
-    "job_role": "HR"
-  }
-]
-
 const Search = () => {
   const [searchName, setSearchName] = useState("");
   const [employees, setEmployees] = useState([]);
@@ -94,7 +11,7 @@ const Search = () => {
     e.preventDefault();
 
     try {
-      // Here, we fetch the employees (name , id, job_role) that match the entered name
+      // Here, we fetch the employees (name , id, job_role, image_url) that match the entered name
       const response = await fetch(
         `${import.meta.env.VITE_DIRECTORY_API_URL}/employees?name=${searchName}`
       );
@@ -128,7 +45,7 @@ const Search = () => {
           </button>
         </form>
       </div>
-      {fake_employees.length == 0 ? (
+      {employees.length == 0 ? (
         <p>No results. Make sure you spelled right!</p>
       ) : (
         <div
@@ -136,7 +53,7 @@ const Search = () => {
           style={{ display: "flex", flexWrap: "wrap", gap: "20px", justifyContent: "center" }}
         >
           {fake_employees.map((employee) => (
-            <EmployeeCard key={employee.id} name={employee.name} id={employee.id} job_role={employee.job_role} />
+            <EmployeeCard key={employee.id} name={employee.name} id={employee.id} job_role={employee.job_role} image_url={employee.image_url} />
           ))}
         </div>
       )}

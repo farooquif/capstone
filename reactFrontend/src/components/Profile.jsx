@@ -3,14 +3,6 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAuth } from "../hooks/AuthContext";
 
-const fake_profile = {
-  name: "John",
-  job_role: "Software Developer",
-  phone_number: "800-123-4567",
-  work_location: "Hartford",
-  salary: 5000000,
-};
-
 const Profile = () => {
   // retrieve id of current user
   const auth = useAuth();
@@ -24,6 +16,7 @@ const Profile = () => {
   // job_role
   // phone_number
   // work_location
+  // image_url
   // (conditionally) salary
   const [profile, setProfile] = useState({});
 
@@ -64,19 +57,18 @@ const Profile = () => {
         }}
       >
         <div className="card-body">
-          <h2 className="card-title">{fake_profile?.name}</h2>
-          <img
-            className="circle_image"
-            src="https://randomuser.me/api/portraits/men/24.jpg"
-          />
-          <div className="card-text">Job Role: {fake_profile?.job_role}</div>
+          <h2 className="card-title">{profile?.name}</h2>
+          <img className="circle_image" src={profile?.image_url} />
+          <div className="card-text">Job Role: {profile?.job_role}</div>
+          <div className="card-text">Phone Number: {profile?.phone_number}</div>
           <div className="card-text">
-            Phone Number: {fake_profile?.phone_number}
+            Work Location: {profile?.work_location}
           </div>
-          <div className="card-text">
-            Work Location: {fake_profile?.work_location}
-          </div>
-          <div className="card-text">Salary: ${fake_profile?.salary}</div>
+          {profile?.salary ? (
+            <div className="card-text">Salary: ${profile?.salary}</div>
+          ) : (
+            <div className="card-text">Not authorized to view salary</div>
+          )}
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-const EmployeeCard = ({ name, id, job_role }) => {
+const EmployeeCard = ({ name, id, job_role, image_url }) => {
   const navigate = useNavigate();
 
   return (
@@ -13,7 +13,7 @@ const EmployeeCard = ({ name, id, job_role }) => {
       >
         <div className="card-body">
           <h5 className="card-title">Employee Details</h5>
-          <img className="circle_image" src="https://randomuser.me/api/portraits/men/24.jpg"/>
+          <img className="circle_image" src={image_url}/>
           <div className="card-text">Name: {name}</div>
           <div className="card-text">Job Role: {job_role}</div>
         </div>
