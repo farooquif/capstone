@@ -20,7 +20,7 @@ const Reports = () => {
           }
           return res.json();
         })
-        .then((data) => setProfile(data))
+        .then((data) => setReports(data))
         .catch((error) => console.error(error));
     };
 
@@ -30,7 +30,7 @@ const Reports = () => {
   return (
     <>
       <p>Instantly access all of your direct reports below!</p>
-      {fake_reports.length == 0 ? (
+      {reports.length == 0 ? (
         <p>You have no direct reports at the moment.</p>
       ) : (
         <div

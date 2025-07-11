@@ -52,7 +52,7 @@ const Search = () => {
           className="card-container"
           style={{ display: "flex", flexWrap: "wrap", gap: "20px", justifyContent: "center" }}
         >
-          {fake_employees.map((employee) => (
+          {employees.map((employee) => (
             <EmployeeCard key={employee.id} name={employee.name} id={employee.id} job_role={employee.job_role} image_url={employee.image_url} />
           ))}
         </div>
