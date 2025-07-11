@@ -17,7 +17,7 @@ function LoginForm() {
 
   return (
     <div className="container">
-      <form onSubmit={handleLogin} className="mt-5">
+      <form onSubmit={handleLogin} className="mt-2">
         <div className="form-group">
           <label htmlFor="username">Username</label>
           <input
