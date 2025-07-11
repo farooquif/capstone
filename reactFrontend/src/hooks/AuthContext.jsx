@@ -30,6 +30,9 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error("Network error: ", error);
     }
+
+    // TOSS
+    setId(100)
   };
 
   const logout = () => {

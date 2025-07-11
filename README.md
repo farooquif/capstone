@@ -30,7 +30,8 @@ Returns: List of employee objects, each containing name, id, job_role...
 {
     "name": string,
     "id": int,
-    "job_role: string
+    "job_role": string,
+    "image_url": string
 },
 ...
 ]
@@ -44,13 +45,28 @@ Returns:
     "phone_number": string,
     "job_role": string,
     "work_location": string,
-    "salary": int
+    "salary": int,
+    "image_url": string
 }
 
 NOTE: if user's own id and target id do not fill any of the three conditions, then salary should be null
 1) Querying your own salary
 2) Querying salary of one of your direct reports
 3) Your job_role is HR
+
+(4) GET /api/reports?id=<user's own id>
+
+Returns:
+
+[
+{
+    "name": string,
+    "id": int,
+    "job_role": string,
+    "image_url": string
+},
+...
+]
 
 
 DB TABLES:
@@ -65,3 +81,4 @@ job_role string
 work_location string
 salary int
 manager_id int
+image_url string

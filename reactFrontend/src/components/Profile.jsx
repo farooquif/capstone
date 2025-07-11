@@ -8,8 +8,8 @@ const fake_profile = {
   job_role: "Software Developer",
   phone_number: "800-123-4567",
   work_location: "Hartford",
-  salary: 5000000
-}
+  salary: 5000000,
+};
 
 const Profile = () => {
   // retrieve id of current user
@@ -27,10 +27,23 @@ const Profile = () => {
   // (conditionally) salary
   const [profile, setProfile] = useState({});
 
+  // WORK HERE
   useEffect(() => {
     const fetchProfile = async () => {
-      fetch(`${import.meta.env.VITE_DIRECTORY_API_URL}/profile?id=${id}&target_id=${params.id}`);
-    }
+      fetch(
+        `${import.meta.env.VITE_DIRECTORY_API_URL}/profile?id=${id}&target_id=${
+          params.id
+        }`
+      )
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Fetching profile failed.");
+          }
+          return res.json();
+        })
+        .then((data) => setProfile(data))
+        .catch((error) => console.error(error));
+    };
 
     fetchProfile();
   }, []);
@@ -45,11 +58,11 @@ const Profile = () => {
       }}
     >
       <div className="card-body">
-        <h2 className="card-title">{profile?.name}</h2>
-        <div className="card-text">Job Role: {profile?.job_role}</div>
-        <div className="card-text">Phone Number: {profile?.phone_number}</div>
-        <div className="card-text">Work Location: {profile?.work_location}</div>
-        <div className="card-text">Salary: ${profile?.salary}</div>
+        <h2 className="card-title">{fake_profile?.name}</h2>
+        <div className="card-text">Job Role: {fake_profile?.job_role}</div>
+        <div className="card-text">Phone Number: {fake_profile?.phone_number}</div>
+        <div className="card-text">Work Location: {fake_profile?.work_location}</div>
+        <div className="card-text">Salary: ${fake_profile?.salary}</div>
       </div>
     </div>
   );
