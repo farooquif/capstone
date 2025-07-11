@@ -13,6 +13,7 @@ const EmployeeCard = ({ name, id, job_role }) => {
       >
         <div className="card-body">
           <h5 className="card-title">Employee Details</h5>
+          <img className="circle_image" src="https://randomuser.me/api/portraits/men/24.jpg"/>
           <div className="card-text">Name: {name}</div>
           <div className="card-text">Job Role: {job_role}</div>
         </div>

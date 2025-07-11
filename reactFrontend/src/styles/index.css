@@ -23,3 +23,7 @@
 .bg-light {
   background-color: lightgray !important;
 }
+
+.circle_image {
+  border-radius: 50%;
+}

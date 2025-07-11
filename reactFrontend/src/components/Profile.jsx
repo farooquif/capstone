@@ -50,19 +50,34 @@ const Profile = () => {
 
   return (
     <div
-      className="card"
       style={{
-        flex: "1",
-        minWidth: "300px",
-        maxWidth: "300px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
       }}
     >
-      <div className="card-body">
-        <h2 className="card-title">{fake_profile?.name}</h2>
-        <div className="card-text">Job Role: {fake_profile?.job_role}</div>
-        <div className="card-text">Phone Number: {fake_profile?.phone_number}</div>
-        <div className="card-text">Work Location: {fake_profile?.work_location}</div>
-        <div className="card-text">Salary: ${fake_profile?.salary}</div>
+      <div
+        className="card"
+        style={{
+          minWidth: "350px",
+          maxWidth: "350px",
+        }}
+      >
+        <div className="card-body">
+          <h2 className="card-title">{fake_profile?.name}</h2>
+          <img
+            className="circle_image"
+            src="https://randomuser.me/api/portraits/men/24.jpg"
+          />
+          <div className="card-text">Job Role: {fake_profile?.job_role}</div>
+          <div className="card-text">
+            Phone Number: {fake_profile?.phone_number}
+          </div>
+          <div className="card-text">
+            Work Location: {fake_profile?.work_location}
+          </div>
+          <div className="card-text">Salary: ${fake_profile?.salary}</div>
+        </div>
       </div>
     </div>
   );

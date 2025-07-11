@@ -10,6 +10,7 @@ import Search from "./components/Search";
 import LoginForm from "./components/LoginForm";
 import Profile from "./components/Profile";
 import Predictor from "./components/Predictor";
+import Reports from "./components/Reports";
 
 // Auth Components
 import { AuthProvider } from "./hooks/AuthContext";
@@ -53,6 +54,11 @@ function App() {
                 <li className="nav-item">
                   <Link className="nav-link" to="/about">
                     About
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/reports">
+                    Direct Reports
                   </Link>
                 </li>
               </ul>
