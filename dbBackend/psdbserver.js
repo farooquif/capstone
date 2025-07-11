@@ -107,7 +107,7 @@ app.get('/api/reports', async (req, res) => {
   try {
     const result = await query(
       `
-      SELECT id, name, phone_number, job_role, work_location, salary
+      SELECT id, name, job_role, work_location
       FROM users
       WHERE manager_id = $1
       `,
