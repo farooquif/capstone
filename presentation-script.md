@@ -61,7 +61,7 @@ Look up: 'Mark Green' (Self) show salary
 
 ## Show about us page
 
-## Show predictor data, showing high and low salary predictions
+## Show salary predictor, showing high and low salary predictions
 
 Lower Salary: Customer Support, Hartford
 
