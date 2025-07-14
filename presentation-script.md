@@ -25,8 +25,6 @@ password: grape123
 
 Look up: 'Michael Chen' (CEO) show salary
 
-Show salary of direct reports as manager
-
 ###  Relog as
 
 Product Manager
