@@ -79,7 +79,7 @@ const NavBar = () => {
         </div>
         {name ? (
           <p className="mt-3" style={{ color: "white" }}>
-            Logged in: {name}
+            Hi {name}!
           </p>
         ) : (
           <p className="mt-3" style={{ color: "white" }}>

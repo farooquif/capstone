@@ -67,7 +67,7 @@ const Predictor = () => {
           </button>
         </form>
       </div>
-      {salary && <p>Predicted Salary: ${salary}</p>}
+      {salary && <p>Predicted Salary: ${salary.toLocaleString()}</p>}
     </>
   );
 };

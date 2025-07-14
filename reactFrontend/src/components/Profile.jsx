@@ -65,7 +65,7 @@ const Profile = () => {
             Work Location: {profile?.work_location}
           </div>
           {profile?.salary ? (
-            <div className="card-text">Salary: ${profile?.salary}</div>
+            <div className="card-text">Salary: ${Number(profile?.salary).toLocaleString()}</div>
           ) : (
             <div className="card-text">Not authorized to view salary</div>
           )}
