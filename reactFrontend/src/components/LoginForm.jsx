@@ -10,7 +10,12 @@ function LoginForm() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    await login(username, password);
+
+    try {
+      await login(username, password);
+    } catch (error) {
+      alert("Invalid Credentials. Try Again.");
+    }
     console.log(username, password);
     navigate("/");
   };

@@ -47,6 +47,17 @@ const NavBar = () => {
                   style={{
                     color: "white",
                   }}
+                  to="/reports"
+                >
+                  Direct Reports
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link"
+                  style={{
+                    color: "white",
+                  }}
                   to="/predictor"
                 >
                   Salary Predictor
@@ -61,17 +72,6 @@ const NavBar = () => {
                   to="/about"
                 >
                   About
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  style={{
-                    color: "white",
-                  }}
-                  to="/reports"
-                >
-                  Direct Reports
                 </Link>
               </li>
             </ul>

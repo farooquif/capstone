@@ -23,8 +23,8 @@ def predict():
     data = request.json
     
     # Extract job role and location from request
-    job_role = data.get('jobRole')
-    location = data.get('location')
+    job_role = data.get('job_role')
+    location = data.get('work_location')
     
     if not job_role or not location:
         return jsonify({'error': 'Job role and location are required'}), 400

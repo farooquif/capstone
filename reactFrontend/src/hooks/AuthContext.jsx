@@ -11,26 +11,22 @@ export const AuthProvider = ({ children }) => {
   const [name, setName] = useState(null);
 
   const login = async (username, password) => {
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_DIRECTORY_API_URL}/login`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
-        }
-      );
-      if (response.ok) {
-        const data = await response.json();
-        setId(data.id);
-        setName(data.name)
-      } else {
-        throw new Error("Login failed");
+    const response = await fetch(
+      `${import.meta.env.VITE_DIRECTORY_API_URL}/login`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
       }
-    } catch (error) {
-      console.error("Network error: ", error);
+    );
+    if (response.ok) {
+      const data = await response.json();
+      setId(data.id);
+      setName(data.name);
+    } else {
+      throw new Error("Login failed");
     }
   };
 
