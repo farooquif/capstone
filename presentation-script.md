@@ -41,8 +41,6 @@ Look up: 'Michael Chen' (CEO) salary won't show
 
 ### Show page that shows direct reports if any
 
-Show only own salary as Non-manager/Non-Hr
-
 ### Relog as
 
 IT Support
